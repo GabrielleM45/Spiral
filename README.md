@@ -1,2 +1,2 @@
-# Project_3
+# Spiral
 Final project for bootcamp
