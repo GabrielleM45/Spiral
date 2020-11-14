@@ -7,7 +7,7 @@ import Nav from "./components/Nav";
 import Home from "./pages/home";
 import Login from "./pages/login";
 import Signup from "./pages/signup"
-import Blogs from "./pages/blogs"
+import Blogs from "./pages/posts"
 import Members from "./pages/members"
 function App() {
   return (

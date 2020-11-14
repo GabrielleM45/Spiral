@@ -1,5 +1,5 @@
 import React from "react";
-function Blogs() {
+function Posts() {
     return (
         <>
 
@@ -7,7 +7,7 @@ function Blogs() {
            
            
             <div className="container">
-                <h1>View All Blogs</h1><br />
+                <h1>View All Posts</h1><br />
 
                 <label for="users">Filter by Author</label><br />
                 <select name="users" id="users" className="DropDowns">
@@ -47,4 +47,4 @@ function Blogs() {
     )
 }
 
-export default Blogs;
+export default Posts;
