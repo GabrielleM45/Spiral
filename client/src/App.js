@@ -1,12 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import NoMatch from "./pages/NoMatch";
-import Nav from "./components/Nav";
-import Home from "./pages/home";
-import Login from "./pages/login";
-import Signup from "./pages/signup"
-import Posts from "./pages/posts"
-import Members from "./pages/members"
 function App() {
   return (
     <Router>
@@ -30,7 +23,6 @@ function App() {
             <Members />
           </Route>
           <Route>
-            <NoMatch />
           </Route>
         </Switch>
       </div>
