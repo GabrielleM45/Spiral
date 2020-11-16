@@ -1,15 +1,17 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Dashboard from "client/src/components/pages/Dashboard.js";
+// import Footer from "./src/components/footer";
+
 function App() {
   return (
     <Router>
       <div>
-        <Header />
-       <Nav />
+        {/* <Nav /> */}
         <Switch>
           <Route exact path={["/"]}>
-            <Home />
-          </Route>
+            <Dashboard />
+            {/* </Route>
           <Route exact path="/Login">
             <Login />
           </Route>
@@ -22,7 +24,7 @@ function App() {
           <Route exact path="/Members">
             <Members />
           </Route>
-          <Route>
+          <Route> */}
           </Route>
         </Switch>
       </div>
