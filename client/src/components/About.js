@@ -1,1 +1,0 @@
-// User about me sidebar
