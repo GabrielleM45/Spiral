@@ -3,7 +3,7 @@ import React from "react";
 function Nav() {
   return (
     <nav className="navbar navbar-expand">
-    <a className="navbar-brand" href="/">Blog Machine</a>
+    <a className="navbar-brand" href="/">Spiral</a>
     <div className="collapse navbar-collapse" id="navbarText">
         <ul className="navbar-nav mr-auto">
             <li className="nav-item active" id="HomeItem">

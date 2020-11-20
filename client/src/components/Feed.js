@@ -1,13 +1,10 @@
 import React from "react";
-function Blogs() {
+function Posts() {
     return (
         <>
 
-          
-           
-           
             <div className="container">
-                <h1>View All Blogs</h1><br />
+                <h1>View All Posts</h1><br />
 
                 <label for="users">Filter by Author</label><br />
                 <select name="users" id="users" className="DropDowns">
@@ -25,14 +22,14 @@ function Blogs() {
                     <option value="oldest">Oldest First</option>
                 </select><br /><br />
 
-                <input type="text" id="SearchFilteresBlogs" placeholder="Search Filtered List" /><br /><br />
+                <input type="text" id="SearchFilteredPosts" placeholder="Search Filtered List" /><br /><br />
 
                 <div style={{ display: "none" }} id="alert" className="alert alert-danger" role="alert">
                     <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                     <span className="sr-only">Error:</span> <span className="msg"></span>
                 </div>
-                <div id="FilterBlogs"><div className="row">
-                    <div id="NoBlogs"></div>
+                <div id="FilterPosts"><div className="row">
+                    <div id="NoPosts"></div>
                     <div className="col" id="BlogList">
                     </div>
                 </div></div>
@@ -47,4 +44,4 @@ function Blogs() {
     )
 }
 
-export default Blogs;
+export default Posts;
