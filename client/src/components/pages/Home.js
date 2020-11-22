@@ -1,12 +1,12 @@
 import React from 'react';
 import '../assets/css/App.css';
-import HeroSection from '../HeroSection';
+import LandingSection from '../LandingSection';
 import footer from '../footer';
 
 function Home () {
     return (
         <>
-        <HeroSection />
+        <LandingSection />
         <footer />
         </>
     );

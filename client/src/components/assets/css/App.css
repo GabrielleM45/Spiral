@@ -1,44 +1,82 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'PT Sans', sans-serif;
-}
-
-.home,
-.services,
-.products,
-.sign-up {
-    display: flex;
-    height: 90vh;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-}
-
-.dashBoard {
-    background-image: url('../images/img-2.jpg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    color: #fff;
-    font-size: 100px;
-}
-
-.log-in {
-    background-image: url('../images/img-1.jpg');
-    background-position: center;
-    background-size: fill;
-    background-repeat: no-repeat;
-    color: #fff;
-    font-size: 100px;
-}
-
-.sign-up {
-    background-image: url('../images/img-8.jpg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    color: #fff;
-    font-size: 100px;
-}
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'PT Sans', sans-serif;
+    }
+    
+    .home,
+    .log-in,
+    .dashBoard {
+        display: flex;
+        height: 90vh;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+    }
+    
+    .dashBoard {
+        background-image: url('../images/img-1.jpg');
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        color: #fff;
+        font-size: 100px;
+    }
+    
+    .log-in {
+        background-image: url('../images/IMG_0674.png');
+        background-position: center;
+        background-size: fill;
+        background-repeat: no-repeat;
+        text-align: center;
+        color: #fff;
+        font-size: 100px;
+    }
+    
+    .form-group {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .form-control {
+        margin-bottom: 0.5rem;
+        width: 60%;
+        height: 8%;
+    }
+    
+    .form-input {
+        display: inline-block;
+        font-size: 1rem;
+        margin-bottom: 6px;
+        color: #fff;
+    }
+    
+    .placeholder {
+        color: #595959;
+        font-size: 12px;
+    }
+    
+    .form-group {
+        align-items: center;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        justify-content: center;
+        margin: 100px auto;
+        width: 1000px;
+        box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        height: 600px;
+    }
+    
+    .form-input-login {
+        font-size: 20px;
+        text-align: center;
+    }
