@@ -1,19 +1,19 @@
 exports.createPostValidator = (req, res, next) => {
   // Title
-  req.check("title", "Write a title.").notEmpty();
+  req.check("title", "Please write a title.").notEmpty();
   req.check("title", "Title must be between 4 to 150 characters.").isLength({
     min: 4,
-    max: 150,
+    max: 150
   });
   // Body
-  req.check("body", "Write a body.").notEmpty();
+  req.check("body", "Post must include a body.").notEmpty();
   req.check("body", "Body must be between 4 to 2000 characters.").isLength({
     min: 4,
-    max: 2000,
+    max: 2000
   });
   // Check for errors.
   const errors = req.validationErrors();
-  // If error show the first one as they occur.
+  // If there's an error, show the first one as they occur.
   if (errors) {
     const firstError = errors.map((error) => error.msg)[0];
     return res.status(400).json({ error: firstError });
@@ -52,5 +52,3 @@ exports.userSignupValidator = (req, res, next) => {
   // Proceed to next middleware.
   next();
 };
-
-// 62. Create post with image upload and user.

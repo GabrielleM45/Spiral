@@ -31,7 +31,7 @@ userSchema
   .set(function (password) {
     // Create a temporary variable called hashed_password
     this._password = password;
-    // Generate a timestamp
+    // Generate a timestamp for salt
     this.salt = uuidv4();
     // Encrypt password
     this.hashed_password = this.encryptPassword(password);
@@ -47,9 +47,12 @@ userSchema.methods = {
     return this.encryptPassword(plainText) === this.hashed_password
   },
 
+  // Function to hash password
   encryptPassword: function (password) {
     if (!password) return "";
     try {
+
+      // Crypto is a Nodejs module which doesn't require additional installation
       return crypto
         .createHmac("sha1", this.salt)
         .update(password)

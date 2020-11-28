@@ -4,8 +4,10 @@ const expressJwt = require('express-jwt');
 const User = require("../models/user");
 
 exports.signup = async (req, res) => {
+  // Check if user already exists
   const userExists = await User.findOne({ email: req.body.email });
   if (userExists)
+  // Unauthorized status
     return res.status(403).json({
       error: "Email is already in use!",
     });
@@ -21,7 +23,7 @@ exports.signin = (req, res) => {
     // If error, or no user.
     if (err || !user) {
       return res.status(401).json({
-        error: "User with that email does not exist. Please sign in.",
+        error: "No users with that email.",
       });
     }
     // If user is found make sure email and password match.
