@@ -1,3 +1,4 @@
+// Validation for posts
 exports.createPostValidator = (req, res, next) => {
   // Title
   req.check("title", "Please write a title.").notEmpty();
@@ -21,7 +22,7 @@ exports.createPostValidator = (req, res, next) => {
   // Proceed to next middleware.
   next();
 };
-
+// Validation for new user signup.
 exports.userSignupValidator = (req, res, next) => {
   // Name is not null and between 4 - 10 characters in length.
   req.check("name", "Name is required").notEmpty();
@@ -40,6 +41,7 @@ exports.userSignupValidator = (req, res, next) => {
     .check("password")
     .isLength({ min: 6 })
     .withMessage("Password must contain at least 6 characters")
+    // Regular expression to ensure password contains a digit. 
     .matches(/\d/)
     .withMessage("Password must contain a number");
   // Check for errors.

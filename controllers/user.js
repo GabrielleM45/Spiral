@@ -8,7 +8,7 @@ exports.userById = (req, res, next, id) => {
         error: "User not found.",
       });
     }
-    // Add profile object in request with user info.
+    // Adds profile object in request with user info.
     req.profile = user;
     next();
   });
@@ -45,15 +45,16 @@ exports.getUser = (req, res) => {
   return res.json(req.profile);
 };
 
+// Update user information
 exports.updateUser = (req, res, next) => {
   let user = req.profile;
-  //extend - mutates the source object.
+  // Changes the source object to allow for updating.
   user = _.extend(user, req.body);
   user.updated = Date.now();
   user.save((err) => {
     if (err) {
       return res.status(400).json({
-        error: "Not authorized to perform this action.",
+        error: "Unauthorized.",
       });
     }
     // Hide hashed password and salt
@@ -63,7 +64,7 @@ exports.updateUser = (req, res, next) => {
   });
 };
 
-
+// Delete user profile
 exports.deleteUser = (req, res, next) => {
   let user = req.profile;
   user.remove((err, user) => {
@@ -72,6 +73,6 @@ exports.deleteUser = (req, res, next) => {
         error: err
       })
     }
-    res.json({ message: "User deleted successfully" });
+    res.json({ message: "User deleted." });
   })
 }

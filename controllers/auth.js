@@ -17,25 +17,25 @@ exports.signup = async (req, res) => {
 };
 
 exports.signin = (req, res) => {
-  // Find the user based on email.
+  // Find user by email.
   const { email, password } = req.body;
   User.findOne({ email }, (err, user) => {
     // If error, or no user.
     if (err || !user) {
       return res.status(401).json({
-        error: "No users with that email.",
+        error: "No account exists with email.",
       });
     }
     // If user is found make sure email and password match.
     // Create authenticate method in model and use here.
     if (!user.authenticate(password)) {
       return res.status(401).json({
-        error: "Email and password do not match!",
+        error: "Incorrect email or password!",
       });
     }
-    // Generate a token with user id and secret.
+    // Create a token with user id and secret.
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
-    // Persist the token as the 't' in cookie with expiry date.
+    // Use token as 't' in cookie with expiry date.
     res.cookie("t", token, { expire: new Date() + 9999 });
     // Return response with user and token to frontend client.
     const { _id, name, email } = user;
@@ -43,14 +43,15 @@ exports.signin = (req, res) => {
   });
 };
 
+// Clearing cookie to sign user out.
 exports.signout = (req, res) => {
     res.clearCookie("t")
     return res.json({message: "You have successfully signed out."});
 };
 
+// Require user to be signed in to access certain routes
 exports.requireSignin = expressJwt({
-  // if the token is valid, expressJWT appends verified user ID
-  // in an auth key to the request object.
+  // If token is valid, express-jwt appends verified user ID
     secret: process.env.JWT_SECRET,
     algorithms: ["sha1", "RS256", "HS256"],
     userProperty: "auth"

@@ -30,6 +30,7 @@ app.use(expressValidator());
 app.use("/", postRoutes);
 app.use("/", authRoutes);
 app.use("/", userRoutes);
+// express-jwt error handling
 app.use(function (err, req, res, next) {
     if (err.name === 'UnauthorizedError') {
       res.status(401).json({ error: "Unauthorized!" });
