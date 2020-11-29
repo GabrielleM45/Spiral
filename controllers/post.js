@@ -2,6 +2,20 @@ const Post = require("../models/post");
 const formidable = require("formidable");
 const fs = require("fs");
 
+exports.postById = (req, res, next, id) => {
+  Post.findById(id)
+    .populate("postedBy", "_id name")
+    .exec((err, post) => {
+      if (err || !post) {
+        return res.status(400).json({
+          error: err,
+        });
+      }
+      req.post = post;
+      next();
+    });
+};
+
 exports.getPosts = (req, res) => {
   const posts = Post.find()
     .populate("postedBy", "_id name")
@@ -43,15 +57,39 @@ exports.createPost = (req, res, next) => {
 
 // Find posts by user
 exports.postsByUser = (req, res) => {
-  Post.find({postedBy: req.profile._id})
-  .populate("postedBy", "_id name")
-  .sort("_created")
-  .exec((err, posts) => {
+  Post.find({ postedBy: req.profile._id })
+    .populate("postedBy", "_id name")
+    .sort("_created")
+    .exec((err, posts) => {
+      if (err) {
+        return res.status(400).json({
+          error: err,
+        });
+      }
+      res.json(posts);
+    });
+};
+
+exports.isPoster = (req, res, next) => {
+  let isPoster = req.post && req.auth && req.post.postedBy._id == req.auth._id;
+  if (!isPoster) {
+    return res.status(403).json({
+      error: "Not authorized to perform this action.",
+    });
+  }
+  next();
+};
+
+exports.deletePost = (req, res) => {
+  let post = req.post;
+  post.remove((err, post) => {
     if (err) {
       return res.status(400).json({
-        error: err
+        error: err,
       });
     }
-    res.json(posts);
+    res.json({
+      message: "Post deleted successfully.",
+    });
   });
 };
