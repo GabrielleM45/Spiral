@@ -10,7 +10,7 @@ class Signup extends Component {
       error: "",
     };
   }
-
+  // Handle change function with 'name' as placeholder
   handleChange = (name) => (event) => {
     this.setState({ [name]: event.target.value });
   };
@@ -21,9 +21,9 @@ class Signup extends Component {
     const user = {
       name,
       email,
-      password,
+      password
     };
-    // console.log(user);
+    // Using fetch rather than installing axios for API
     fetch("http://localhost:8080/signup", {
       method: "POST",
       headers: {
@@ -39,6 +39,7 @@ class Signup extends Component {
   };
 
   render() {
+    const { name, email, password } = this.state;
     return (
       <div className="container">
         <h2 className="mt-5 mb-5">Sign up</h2>
@@ -50,7 +51,7 @@ class Signup extends Component {
               onChange={this.handleChange("name")}
               type="text"
               className="form-control"
-              value={this.state.name}
+              value={name}
             />
           </div>
           <div className="form-group">
@@ -59,6 +60,7 @@ class Signup extends Component {
               onChange={this.handleChange("email")}
               type="email"
               className="form-control"
+              value={email}
             />
           </div>
           <div className="form-group">
@@ -67,6 +69,7 @@ class Signup extends Component {
               onChange={this.handleChange("password")}
               type="password"
               className="form-control"
+              value={password}
             />
           </div>
           <button
@@ -82,5 +85,3 @@ class Signup extends Component {
 }
 
 export default Signup;
-
-// 101. Handling onChange events

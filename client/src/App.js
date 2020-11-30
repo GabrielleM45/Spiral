@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from 'react-router-dom';
 import MainRouter from "./routes/MainRouter";
 
 const App = () => {
@@ -7,6 +7,7 @@ const App = () => {
   <BrowserRouter>
     <MainRouter />
   </BrowserRouter>
-  )}
+  )
+}
 
 export default App;
