@@ -1,34 +1,10 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import { signout, isAuthenticated } from "../auth";
 
 const isActive = (history, path) => {
   if (history.location.pathname === path) return { color: "#ff9900" };
   else return { color: "#ffffff" };
-};
-
-export const signout = (next) => {
-  if (typeof window !== "undefined") localStorage.removeItem("jwt");
-  next();
-  return fetch("http://localhost:8080/signout", {
-    method: "GET",
-  })
-    .then((response) => {
-      console.log("signout", response);
-      return response.json();
-    })
-    .catch((err) => console.log(err));
-};
-
-export const isAuthenticated = () => {
-  if (typeof window == "undefined") {
-    return false;
-  }
-
-  if (localStorage.getItem("jwt")) {
-    return JSON.parse(localStorage.getItem("jwt"));
-  } else {
-    return false;
-  }
 };
 
 const Nav = ({ history }) => {
@@ -64,16 +40,28 @@ const Nav = ({ history }) => {
         )}
 
         {isAuthenticated() && (
-          <li className="nav-item">
-            <a
-              className="nav-link"
-              href="/#"
-              style={(isActive(history, "/signout"), { cursor: "pointer" })}
-              onClick={() => signout(() => history.push("/"))}
-            >
-              Sign Out
-            </a>
-          </li>
+          <>
+            <li className="nav-item">
+              <a
+                className="nav-link"
+                href="/#"
+                style={(isActive(history, "/signout"), { cursor: "pointer" })}
+                onClick={() => signout(() => history.push("/"))}
+              >
+                Sign Out
+              </a>
+            </li>
+
+            <li className="nav-item">
+              <Link
+                to={`/user/${isAuthenticated().user._id}`}
+                style={{ color: "white", textDecoration: "none" }}
+                className="nav-link"
+              >
+                {`${isAuthenticated().user.name}'s Profile`}
+              </Link>
+            </li>
+          </>
         )}
       </ul>
     </div>
@@ -81,6 +69,3 @@ const Nav = ({ history }) => {
 };
 
 export default withRouter(Nav);
-
-
-// 113

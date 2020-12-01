@@ -3,8 +3,8 @@ import React from "react";
 const Home = () => {
     return(
     <div className="jumbotron">
-        <h2>Home</h2>
-        <p className="lead">Welcome to React Front End.</p>
+        <h2>Spirl</h2>
+        <p className="lead">Create Something Wonderful.</p>
     </div>
     )};
 
