@@ -44,7 +44,7 @@ class Profile extends Component {
           </div>
           <div className="col-md-6">
             {isAuthenticated().user &&
-              isAuthenticated().user._id == user._id && (
+              isAuthenticated().user._id === user._id && (
                 <div className="d-inline-block mt-5">
                   <Link
                     className="btn btn-raised btn-success mr-5"
@@ -66,6 +66,3 @@ class Profile extends Component {
 }
 
 export default Profile;
-
-
-// 124
