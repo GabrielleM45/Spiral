@@ -32,7 +32,7 @@ exports.allUsers = (req, res) => {
         error: err,
       });
     }
-    res.json({ users });
+    res.json(users);
     // hide salt and hashed password
   }).select("name email updated created");
 };
