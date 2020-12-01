@@ -8,10 +8,12 @@ class Signup extends Component {
       email: "",
       password: "",
       error: "",
+      open: false,
     };
   }
   // Handle change function with 'name' as placeholder
   handleChange = (name) => (event) => {
+    this.setState({ error: "" })
     this.setState({ [name]: event.target.value });
   };
 
@@ -21,10 +23,23 @@ class Signup extends Component {
     const user = {
       name,
       email,
-      password
+      password,
     };
-    // Using fetch rather than installing axios for API
-    fetch("http://localhost:8080/signup", {
+    this.signup(user).then((data) => {
+      if (data.error) this.setState({ error: data.error });
+      else
+        this.setState({
+          error: "",
+          name: "",
+          email: "",
+          password: "",
+          open: true
+        });
+    });
+  };
+
+  signup = (user) => {
+    return fetch("http://localhost:8080/signup", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -38,13 +53,9 @@ class Signup extends Component {
       .catch((err) => console.log(err));
   };
 
-  render() {
-    const { name, email, password } = this.state;
+  signupForm = (name, email, password) => {
     return (
-      <div className="container">
-        <h2 className="mt-5 mb-5">Sign up</h2>
-
-        <form>
+    <form>
           <div className="form-group">
             <label className="text-muted">Name</label>
             <input
@@ -79,6 +90,20 @@ class Signup extends Component {
             Submit
           </button>
         </form>
+    )
+  }
+
+  render() {
+    const { name, email, password, error, open } = this.state;
+    return (
+      <div className="container">
+        <h2 className="mt-5 mb-5">Sign up</h2>
+      
+        <div className="alert alert-danger" style={{display: error ? "" : "none"}}>{error}</div>
+
+        <div className="alert alert-info" style={{display: open ? "" : "none"}}>Account created! Please sign in!</div>
+     
+        {this.signupForm(name, email, password)}
       </div>
     );
   }
