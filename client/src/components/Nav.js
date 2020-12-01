@@ -47,14 +47,13 @@ const Nav = ({ history }) => {
         {isAuthenticated() && (
           <>
             <li className="nav-item">
-              <a
+              <span
                 className="nav-link"
-                href="/#"
                 style={(isActive(history, "/signout"), { cursor: "pointer" })}
                 onClick={() => signout(() => history.push("/"))}
               >
                 Sign Out
-              </a>
+              </span>
             </li>
 
             <li className="nav-item">

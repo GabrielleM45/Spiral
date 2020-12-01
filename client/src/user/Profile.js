@@ -3,6 +3,7 @@ import { isAuthenticated } from "../auth";
 import { Redirect, Link } from "react-router-dom";
 import { read } from "./apiUser";
 import profilePic from "../assets/avatar.png";
+import DeleteProfile from "../user/DeleteProfile"
 
 class Profile extends Component {
   constructor() {
@@ -25,8 +26,12 @@ class Profile extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props.match.params.userId);
     const userId = this.props.match.params.userId;
+    this.init(userId);
+  }
+
+  componentWillReceiveProps(props) {
+    const userId = props.match.params.userId;
     this.init(userId);
   }
 
@@ -60,9 +65,7 @@ class Profile extends Component {
                   Edit Profile
                 </Link>
 
-                <button className="btn btn-raised btn-danger">
-                  Delete Profile
-                </button>
+               <DeleteProfile userId={user._id}/>
               </div>
             )}
           </div>
