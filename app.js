@@ -4,21 +4,26 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const expressValidator = require("express-validator");
 const fs = require("fs");
+const cors = require("cors");
+const expressValidator = require("express-validator");
+// const dotenv = require("dotenv");
 
-// dotevn.config()
+// dotenv.config()
 
-// mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }).then(() => console.log("DB Connected"))
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/nodeapi", {
-  useNewUrlParser: true,
-});
+// Connect to the Mongo Database
+mongoose
+  .connect(process.env.MONGODB_URI || "mongodb://localhost/spirl", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("DB Connected."));
 
 mongoose.connection.on("error", (err) => {
   console.log(`DB connection error: ${err.message}`);
 });
 
-//bring in routes
+// Routes
 const postRoutes = require("./routes/post");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
@@ -35,14 +40,17 @@ app.get("/", (req, res) => {
   });
 });
 
-//middleware
+// Middleware
+// Request logger for node.js
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(expressValidator());
+app.use(cors());
 app.use("/", postRoutes);
 app.use("/", authRoutes);
 app.use("/", userRoutes);
+// express-jwt error handling
 app.use(function (err, req, res, next) {
   if (err.name === "UnauthorizedError") {
     res.status(401).json({ error: "Unauthorized!" });

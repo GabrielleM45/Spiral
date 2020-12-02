@@ -1,4 +1,4 @@
-const Post = require("../../../models/post");
+const Post = require("../models/post");
 const formidable = require("formidable");
 const fs = require("fs");
 const _ = require("lodash");
@@ -13,7 +13,6 @@ exports.postById = (req, res, next, id) => {
         });
       }
       req.post = post;
-      // Continue to next middleware.
       next();
     });
 };
@@ -34,20 +33,18 @@ exports.createPost = (req, res, next) => {
   form.parse(req, (err, fields, files) => {
     if (err) {
       return res.status(400).json({
-        error: "Image could not be uploaded.",
+        error: "Unable to upload image.",
       });
     }
     let post = new Post(fields);
-    // Set hashed_password and salt to show as undefined
+    // Hide hashed password and salt.
     req.profile.hashed_password = undefined;
     req.profile.salt = undefined;
-    // Handle file uploaded by user
     post.postedBy = req.profile;
     if (files.photo) {
       post.photo.data = fs.readFileSync(files.photo.path);
       post.photo.contentType = files.photo.type;
     }
-    // Save the post
     post.save((err, result) => {
       if (err) {
         return res.status(400).json({
@@ -59,6 +56,7 @@ exports.createPost = (req, res, next) => {
   });
 };
 
+// Find posts by user
 exports.postsByUser = (req, res) => {
   Post.find({ postedBy: req.profile._id })
     .populate("postedBy", "_id name")
@@ -77,7 +75,7 @@ exports.isPoster = (req, res, next) => {
   let isPoster = req.post && req.auth && req.post.postedBy._id == req.auth._id;
   if (!isPoster) {
     return res.status(403).json({
-      error: "User is not authorized to perform this action.",
+      error: "Not authorized to perform this action.",
     });
   }
   next();
@@ -106,7 +104,7 @@ exports.deletePost = (req, res) => {
       });
     }
     res.json({
-      message: "Post deleted.",
+      message: "Post deleted successfully.",
     });
   });
 };
