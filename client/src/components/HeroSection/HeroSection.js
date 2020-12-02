@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './assets/css/App.css';
-import { Button } from './button';
-import '../components/assets/css/HeroSection.css';
+import '../assets/css/App.css';
+import { ButtonSignUp } from '../Buttons/ButtonSignUp';
+import './HeroSection.css';
 
 function HeroSection() {
     return (
@@ -11,13 +11,13 @@ function HeroSection() {
         <p>SPIRL in</p>
         <div className='hero-btns'>
         <Link to='/SignUpForm'>
-        <Button
+        <ButtonSignUp
             className='btn-signUp'
             buttonStyle='btn-outline'
             buttonSize='btn-large'
             >
             Sign Up
-        </Button>
+        </ButtonSignUp>
 </Link>
     </div>
 </div>
