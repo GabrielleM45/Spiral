@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Loading from '../loading/Loading';
+
 import { singlePost, update } from './apiPost';
 import { isAuthenticated } from "../auth";
 import { Redirect } from 'react-router-dom';

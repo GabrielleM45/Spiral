@@ -1,5 +1,5 @@
 export const read = (userId, token) => {
-  return fetch(`${process.env.REACT_APP_API_URL}/user/${userId}`, {
+  return fetch(`/api/user/${userId}`, {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -30,7 +30,7 @@ export const update = (userId, token, user) => {
 };
 
 export const list = () => {
-  return fetch(`${process.env.REACT_APP_API_URL}/users`, {
+  return fetch(`/api/users`, {
     method: "GET",
   })
     .then((response) => {
