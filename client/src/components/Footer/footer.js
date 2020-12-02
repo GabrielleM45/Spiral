@@ -1,6 +1,6 @@
 import React from 'react';
 
-function footer() {
+function Footer() {
     return (
         <div className='footer-container'>
             <p className="footer-creation">
@@ -15,4 +15,4 @@ function footer() {
     );
 }
 
-export default footer;
+export default Footer;
