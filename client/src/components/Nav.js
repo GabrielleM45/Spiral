@@ -46,14 +46,15 @@ const Nav = ({ history }) => {
 
         {isAuthenticated() && (
           <>
+            
             <li className="nav-item">
-              <span
+              <Link
+                to={`/findpeople`}
+                style={isActive(history, `/findpeople`)}
                 className="nav-link"
-                style={(isActive(history, "/signout"), { cursor: "pointer" })}
-                onClick={() => signout(() => history.push("/"))}
               >
-                Sign Out
-              </span>
+                Find People
+              </Link>
             </li>
 
             <li className="nav-item">
@@ -64,6 +65,16 @@ const Nav = ({ history }) => {
               >
                 {`${isAuthenticated().user.name}'s Profile`}
               </Link>
+            </li>
+
+            <li className="nav-item">
+              <span
+                className="nav-link"
+                style={(isActive(history, "/signout"), { cursor: "pointer" })}
+                onClick={() => signout(() => history.push("/"))}
+              >
+                Sign Out
+              </span>
             </li>
           </>
         )}
