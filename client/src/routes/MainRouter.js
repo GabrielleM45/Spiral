@@ -9,7 +9,9 @@ import Users from "../user/Users";
 import EditProfile from "../user/EditProfile";
 import FindPeople from "../user/FindPeople";
 import NewPost from "../post/NewPost";
+import SinglePost from "../post/SinglePost";
 import PrivateRoute from "../auth/PrivateRoute";
+
 
 const MainRouter = () => {
   return (
@@ -17,6 +19,7 @@ const MainRouter = () => {
       <Nav />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/post/:postId" component={SinglePost} />
         <Route exact path="/users" component={Users} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/signin" component={Signin} />

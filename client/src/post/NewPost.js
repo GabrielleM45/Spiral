@@ -18,7 +18,7 @@ class NewPost extends Component {
     };
   }
 
-  componenetDidMount() {
+  componentDidMount() {
     this.postData = new FormData();
     this.setState({ user: isAuthenticated().user });
   }
@@ -62,7 +62,6 @@ class NewPost extends Component {
             loading: false,
             title: "",
             body: "",
-            photo: "",
             redirectToProfile: true,
           });
         }
@@ -74,7 +73,7 @@ class NewPost extends Component {
     return (
       <form>
         <div className="form-group">
-          <label className="text-muted">Profile Photo</label>
+          <label className="text-muted">Post Photo</label>
           <input
             onChange={this.handleChange("photo")}
             type="file"
