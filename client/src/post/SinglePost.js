@@ -4,11 +4,10 @@ import defaultPic from "../assets/mountain.jpg";
 import { Link, Redirect } from "react-router-dom";
 import { isAuthenticated } from "../auth";
 
-
 class SinglePost extends Component {
   state = {
     post: "",
-    redirect: false
+    redirect: false,
   };
   componentDidMount = () => {
     const postId = this.props.match.params.postId;
@@ -23,15 +22,22 @@ class SinglePost extends Component {
 
   deletePost = () => {
     const postId = this.props.match.params.postId;
-    const token = isAuthenticated().token
-    removePost(postId, token).then(data => {
-        if(data.error) {
-            console.log(data.error)
-        } else {
-            this.setState({redirect: true})
-        }
-    })
-  }
+    const token = isAuthenticated().token;
+    removePost(postId, token).then((data) => {
+      if (data.error) {
+        console.log(data.error);
+      } else {
+        this.setState({ redirect: true });
+      }
+    });
+  };
+
+  confirmDelete = () => {
+    let answer = window.confirm("Are you sure you want to delete this post?");
+    if (answer) {
+      this.deletePost();
+    }
+  };
 
   renderPost = (post) => {
     const posterId = post.postedBy ? `/user/${post.postedBy._id}` : "";
@@ -59,10 +65,16 @@ class SinglePost extends Component {
           {isAuthenticated().user &&
             isAuthenticated().user._id === post.postedBy._id && (
               <>
-                <button className="btn btn-raised btn-warning mr-5">
+                <Link
+                  to={`/post/edit/${post._id}`}
+                  className="btn btn-raised btn-warning btn-sm mr-5"
+                >
                   Update Post
-                </button>
-                <button onClick={this.deletePost} className="btn btn-raised btn-danger mr-5">
+                </Link>
+                <button
+                  onClick={this.confirmDelete}
+                  className="btn btn-raised btn-danger mr-5"
+                >
                   Delete Post
                 </button>
               </>
@@ -74,8 +86,8 @@ class SinglePost extends Component {
 
   render() {
     if (this.state.redirect) {
-        return <Redirect to={`/`} />;
-      }
+      return <Redirect to={`/`} />;
+    }
 
     const { post } = this.state;
     return (
