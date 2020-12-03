@@ -6,7 +6,7 @@ import profilePic from "../assets/avatar.png";
 import DeleteProfile from "../user/DeleteProfile";
 import FollowButton from "./FollowButton";
 import ProfileTabs from "./ProfileTabs";
-
+import { listByUser } from "../post/apiPost";
 class Profile extends Component {
   constructor() {
     super();
@@ -15,6 +15,7 @@ class Profile extends Component {
       redirectToSignin: false,
       following: false,
       error: "",
+      posts: [],
     };
   }
 
@@ -49,6 +50,18 @@ class Profile extends Component {
       } else {
         let following = this.checkFollower(data);
         this.setState({ user: data, following });
+        this.loadPosts(data._id);
+      }
+    });
+  };
+
+  loadPosts = (userId) => {
+    const token = isAuthenticated().token;
+    listByUser(userId, token).then((data) => {
+      if (data.error) {
+        console.log(data.error);
+      } else {
+        this.setState({ posts: data });
       }
     });
   };
@@ -64,7 +77,7 @@ class Profile extends Component {
   }
 
   render() {
-    const { redirectToSignin, user } = this.state;
+    const { redirectToSignin, user, posts } = this.state;
     if (redirectToSignin) return <Redirect to="/signin" />;
 
     const photoUrl = user._id
@@ -77,7 +90,7 @@ class Profile extends Component {
       <div className="container">
         <h2 className="mt-5 mb-5">Profile</h2>
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-md-4">
             <img
               style={{ height: "200px", width: "auto" }}
               className="img-thumbnail"
@@ -86,7 +99,7 @@ class Profile extends Component {
               alt={user.name}
             />
           </div>
-          <div className="col-md-6">
+          <div className="col-md-8">
             <div className="lead mt-2">
               <p>Hello, {user.name}</p>
               <p>Email: {user.email}</p>
@@ -95,6 +108,12 @@ class Profile extends Component {
             {isAuthenticated().user &&
             isAuthenticated().user._id === user._id ? (
               <div className="d-inline-block">
+                <Link
+                  className="btn btn-raised btn-info mr-5"
+                  to={`/post/create`}
+                >
+                  Create Post
+                </Link>
                 <Link
                   className="btn btn-raised btn-success mr-5"
                   to={`/user/edit/${user._id}`}
@@ -110,8 +129,6 @@ class Profile extends Component {
                 onButtonClick={this.followClick}
               />
             )}
-    
-            
           </div>
         </div>
         <div className="row">
@@ -123,8 +140,8 @@ class Profile extends Component {
             <ProfileTabs
               followers={user.followers}
               following={user.following}
+              posts={posts}
             />
-            
           </div>
         </div>
       </div>
