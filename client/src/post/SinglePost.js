@@ -3,6 +3,7 @@ import { singlePost, removePost, like, unlike } from "./apiPost";
 import defaultPic from "../assets/mountain.jpg";
 import { Link, Redirect } from "react-router-dom";
 import { isAuthenticated } from "../auth";
+import Comment from "./Comment";
 
 class SinglePost extends Component {
   state = {
@@ -11,6 +12,7 @@ class SinglePost extends Component {
     redirectToSignin: false,
     like: false,
     likes: 0,
+    comments: [],
   };
 
   checkLike = (likes) => {
@@ -29,9 +31,14 @@ class SinglePost extends Component {
           post: data,
           likes: data.likes.length,
           like: this.checkLike(data.likes),
+          comments: data.comments
         });
       }
     });
+  };
+
+  commentList = (comments) => {
+    this.setState({ comments });
   };
 
   toggleLike = () => {
@@ -141,7 +148,7 @@ class SinglePost extends Component {
   };
 
   render() {
-    const { post, redirect, redirectToSignin } = this.state;
+    const { post, redirect, redirectToSignin, comments } = this.state;
 
     if (redirect) {
       return <Redirect to={`/`} />;
@@ -159,6 +166,11 @@ class SinglePost extends Component {
         ) : (
           this.renderPost(post)
         )}
+        <Comment
+          postId={post._id}
+          comments={comments.reverse()}
+          commentList={this.commentList}
+        />
       </div>
     );
   }
