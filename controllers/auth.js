@@ -1,13 +1,17 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const expressJwt = require('express-jwt');
+const expressJwt = require("express-jwt");
 const User = require("../models/user");
+const _ = require("lodash");
+const {sendEmail} = require("../helpers");
+const dotenv = require("dotenv");
+dotenv.config()
 
 exports.signup = async (req, res) => {
   // Check if user already exists
   const userExists = await User.findOne({ email: req.body.email });
   if (userExists)
-  // Unauthorized status
+    // Unauthorized status
     return res.status(403).json({
       error: "Email is already in use!",
     });
@@ -45,14 +49,76 @@ exports.signin = (req, res) => {
 
 // Clearing cookie to sign user out.
 exports.signout = (req, res) => {
-    res.clearCookie("t")
-    return res.json({message: "You have successfully signed out."});
+  res.clearCookie("t");
+  return res.json({ message: "You have successfully signed out." });
 };
 
 // Require user to be signed in to access certain routes
 exports.requireSignin = expressJwt({
   // If token is valid, express-jwt appends verified user ID
-    secret: process.env.JWT_SECRET,
-    algorithms: ["sha1", "RS256", "HS256"],
-    userProperty: "auth"
+  secret: process.env.JWT_SECRET,
+  algorithms: ["sha1", "RS256", "HS256"],
+  userProperty: "auth",
 });
+
+// Forgot password and reset password methods
+
+exports.forgotPassword = (req, res) => {
+  if (!req.body) return res.status(400).json({ message: "No request body" });
+  if (!req.body.emal)
+    return res.status(400).json({ message: "No request body " });
+
+  const { email } = req.body;
+  User.findOne({ email }, (err, user) => {
+    if (err || !user)
+      return res.status(401).json({
+        error: "No account with given email.",
+      });
+
+    const token = jwt.sign(
+      { _id: user._id, iss: "NODEAPI" },
+      process.env.JWT_SECRET
+    );
+    // Email info
+    const emailInfo = {
+      from: "noreply@node-react.com",
+      to: email,
+      subject: "Password Reset Information",
+      text: `Please use the following link to reset your password: ${proccess.env.CLIENT_URL}/reset-password/${token}`,
+      html: `<p>Please use the following link to reset your password: </p> <p>${process.env.CLIENT_URL}/reset-password/${token}</p>`,
+    };
+    return user.updateOne({ resetPasswordLink: token }, (err, success) => {
+      if (err) {
+        return res.json({ message: err });
+      } else {
+        sendEmail(emailData);
+        return res.status(200).json({
+          message: `Email has been sent to ${email}. Please follow the instructions to reset your password.`,
+        });
+      }
+    });
+  });
+};
+
+exports.resetPassword = (req, res) => {
+  const { resetPasswordLink, newPassword } = req.body;
+  User.findOne({ resetPasswordLink }, (err, user) => {
+    if (err || !user) return res.status(401).json({ error: "Invalid link." });
+    const updatedFields = {
+      password: newPassword,
+      resetPasswordLink: "",
+    };
+    user = _.extend(user, updatedFields);
+    user.updated = Date.now();
+    user.save((err, result) => {
+      if (err) {
+        return res.status(400).json({
+          error: err,
+        });
+      }
+      res.json({
+        message: `Password reset. Please log in with your new password.`,
+      });
+    });
+  });
+};
