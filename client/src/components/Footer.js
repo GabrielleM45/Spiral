@@ -16,7 +16,7 @@ function Footer() {
           padding: "5px",
         }}
       >
-        Created with React
+        <h6>Created with React</h6>
       </footer>
     </div>
   );
