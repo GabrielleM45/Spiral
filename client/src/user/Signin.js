@@ -96,12 +96,12 @@ class Signin extends Component {
         )}
 
         {this.signinForm(email, password)}
-        <p>
+        {/* <p>
           <Link to="/forgot-password" className="text-danger">
             {" "}
             Forgot Password?
           </Link>
-        </p>
+        </p> */}
       </div>
     );
   }
