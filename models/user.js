@@ -34,10 +34,7 @@ const userSchema = new mongoose.Schema({
   },
   following: [{type: ObjectId, ref: "User"}],
   followers: [{type: ObjectId, ref: "User"}],
-  resetPasswordLink: {
-    data: String,
-    default: ""
-  }
+  
 });
 
 // Virtual field

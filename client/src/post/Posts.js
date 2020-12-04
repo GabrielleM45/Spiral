@@ -27,13 +27,13 @@ class Posts extends Component {
           const posterId = post.postedBy ? `/user/${post.postedBy._id}` : "";
           const posterName = post.postedBy ? post.postedBy.name : " Unknown";
           return (
-            <div className="card col-md-4" key={i}>
+            <div className="card col-md-12 mb-2" style={{borderRadius: "10px"}} key={i}>
               <div className="card-body">
                 <img
                   src={`${process.env.REACT_APP_API_URL}/post/photo/${post._id}`}
                   alt={post.title}
                   onError={i => i.target.src = `${defaultPic}`}
-                  className="img-thumbnail mb-3"
+                  className="img-thumbnail mb-3 mr-5 float-left"
                   style={{ height: "200px", width: "auto" }}
                 />
                 <h5 className="card-title">{post.title}</h5>

@@ -9,7 +9,7 @@ class ProfileTabs extends Component {
     return (
       <div>
         <div className="row">
-          <div className="col-md-4">
+          <div className="col-md-3">
             <h3 className="text-primary">Followers</h3>
             <hr />
             {followers.map((person, i) => (
@@ -31,9 +31,10 @@ class ProfileTabs extends Component {
                   </Link>
                 </div>
               </div>
+              
             ))}
           </div>
-          <div className="col-md-4">
+          <div className="col-md-3">
             <h3 className="text-primary">Following</h3>
             <hr />
             {following.map((person, i) => (
@@ -57,7 +58,7 @@ class ProfileTabs extends Component {
               </div>
             ))}
           </div>
-          <div className="col-md-4">
+          <div className="col-md-6">
             <h3 className="text-primary">Posts</h3>
             <hr />
             {posts.map((post, i) => (

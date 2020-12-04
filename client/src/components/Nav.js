@@ -10,7 +10,8 @@ const isActive = (history, path) => {
 const Nav = ({ history }) => {
   return (
     <div>
-      <ul className="nav nav-tabs bg-primary">
+      <nav className="navbar navbar-dark bg-dark fixed-top navbar-default">
+      <ul className="navbar nav">
         <li className="nav-item">
           <Link className="nav-link" style={isActive(history, "/")} to="/">
             Home
@@ -91,6 +92,7 @@ const Nav = ({ history }) => {
           </>
         )}
       </ul>
+      </nav>
     </div>
   );
 };

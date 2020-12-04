@@ -12,8 +12,7 @@ import NewPost from "../post/NewPost";
 import SinglePost from "../post/SinglePost";
 import PrivateRoute from "../auth/PrivateRoute";
 import UpdatePost from "../post/UpdatePost";
-import ForgotPassword from "../user/ForgotPassword";
-import ResetPassword from "../user/ResetPassword";
+import Footer from "../components/Footer.js"
 
 
 const MainRouter = () => {
@@ -22,8 +21,6 @@ const MainRouter = () => {
       <Nav />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/forgot-password" component={ForgotPassword} />
-        <Route exact path="/reset-password/:resetPasswordToken" component={ResetPassword} />
         <PrivateRoute exact path="/post/create" component={NewPost} />
         <Route exact path="/post/:postId" component={SinglePost} />
         <PrivateRoute exact path="/post/edit/:postId" component={UpdatePost} />
@@ -35,6 +32,7 @@ const MainRouter = () => {
         <PrivateRoute exact path="/user/:userId" component={Profile} />
         
       </Switch>
+      <Footer />
     </div>
   );
 };
