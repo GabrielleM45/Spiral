@@ -69,6 +69,7 @@ class NewPost extends Component {
     }
   };
 
+
   newPostForm = (title, body) => {
     return (
       <form className="p-2">

@@ -10,7 +10,7 @@ const isActive = (history, path) => {
 const Nav = ({ history }) => {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span className="navbar-toggler-icon"></span>
   </button>
@@ -87,7 +87,7 @@ const Nav = ({ history }) => {
             <li className="nav-item">
               <span
                 className="nav-link"
-                style={(isActive(history, "/signout"), { cursor: "pointer" })}
+                style={(isActive(history, "/signout"), { cursor: "pointer", color: "white" })}
                 onClick={() => signout(() => history.push("/"))}
               >
                 Sign Out

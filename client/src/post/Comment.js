@@ -71,6 +71,7 @@ class Comment extends Component {
     }
   };
 
+
   render() {
     const { comments } = this.props;
     const { error } = this.state;
