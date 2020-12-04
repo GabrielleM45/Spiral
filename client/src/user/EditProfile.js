@@ -59,7 +59,10 @@ class EditProfile extends Component {
       return false;
     }
     if (password.length >= 1 && password.length <= 5) {
-      this.setState({ error: "Password must be at least 6 characters long.", loading: false });
+      this.setState({
+        error: "Password must be at least 6 characters long.",
+        loading: false,
+      });
       return false;
     }
     return true;
@@ -198,7 +201,10 @@ class EditProfile extends Component {
           alt={name}
         />
 
-        {this.signupForm(name, email, password, about)}
+        {/* {this.signupForm(name, email, password, about)} */}
+        {isAuthenticated().user.role === "admin" ||
+          (isAuthenticated().user._id === id &&
+            this.signupForm(name, email, password, about))}
       </div>
     );
   }

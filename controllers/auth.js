@@ -3,9 +3,9 @@ require("dotenv").config();
 const expressJwt = require("express-jwt");
 const User = require("../models/user");
 const _ = require("lodash");
-const {sendEmail} = require("../helpers");
+const { sendEmail } = require("../helpers");
 const dotenv = require("dotenv");
-dotenv.config()
+dotenv.config();
 
 exports.signup = async (req, res) => {
   // Check if user already exists
@@ -120,5 +120,40 @@ exports.resetPassword = (req, res) => {
         message: `Password reset. Please log in with your new password.`,
       });
     });
+  });
+};
+
+exports.socialLogin = (req, res) => {
+  let user = User.findOne({ email: req.body.email }, (err, user) => {
+    if (err || !user) {
+      // create a new user and login
+      user = new User(req.body);
+      req.profile = user;
+      user.save();
+      // generate a token with user ID and JWT_SECRET
+      const token = jwt.sign(
+        { _id: user._id, iss: "NODEAPI" },
+        process.env.JWT_SECRET
+      );
+      res.cookie("t", token, { expire: new Date() + 9999 });
+      // Return response with user & token to front end
+      const { _id, name, email } = user;
+      return res.json({ token, user: { _id, name, email } });
+    } else {
+      // update existing user with social login info and log in
+      req.profile = user;
+      user = _.extend(user, req.body);
+      user.updated = Date.now();
+      user.save();
+      // Generate a token with user ID and JWT_SECRET
+      const token = jwt.sign(
+        { _id: user._id, iss: "NODEAPI " },
+        proccess.env.JWT_SECRET
+      );
+      res.cookie("t", token, { expire: new Date() + 9999 });
+      // Return response with user & token to front end
+      const { _id, name, email } = user;
+      return res.json({ token, user: { _id, name, email } });
+    }
   });
 };

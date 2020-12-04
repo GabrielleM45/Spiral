@@ -24,7 +24,7 @@ class UpdatePost extends Component {
         this.setState({ redirectToProfile: true });
       } else {
         this.setState({
-          id: data._id,
+          id: data.postedBy._id,
           title: data.title,
           body: data.body,
           error: "",
@@ -152,11 +152,17 @@ class UpdatePost extends Component {
         <img
           style={{ height: "200px", width: "auto" }}
           className="img-thumbnail"
-          src={`${process.env.REACT_APP_API_URL}/post/photo/${id}?${new Date().getTime()}`}
+          src={`${
+            process.env.REACT_APP_API_URL
+          }/post/photo/${id}?${new Date().getTime()}`}
           onError={(i) => (i.target.src = `${defaultPic}`)}
           alt={title}
         />
-        {this.updatePostForm(title, body)}
+        {/* {this.updatePostForm(title, body)} */}
+
+        {isAuthenticated().user.role === "admin" ||
+          (isAuthenticated().user._id === id &&
+            this.updatePostForm(title, body))}
       </div>
     );
   }
