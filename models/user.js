@@ -33,7 +33,8 @@ const userSchema = new mongoose.Schema({
     trim: true
   },
   following: [{type: ObjectId, ref: "User"}],
-  followers: [{type: ObjectId, ref: "User"}]
+  followers: [{type: ObjectId, ref: "User"}],
+  
 });
 
 // Virtual field

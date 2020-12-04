@@ -10,15 +10,29 @@ const isActive = (history, path) => {
 const Nav = ({ history }) => {
   return (
     <div>
-      <ul className="nav nav-tabs bg-primary">
+      <nav className="navbar navbar-dark bg-dark fixed-top navbar-default">
+      <ul className="navbar nav">
         <li className="nav-item">
           <Link className="nav-link" style={isActive(history, "/")} to="/">
             Home
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" style={isActive(history, "/users")} to="/users">
+          <Link
+            className="nav-link"
+            style={isActive(history, "/users")}
+            to="/users"
+          >
             Users
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link
+            to={`/post/create`}
+            style={isActive(history, `/post/create`)}
+            className="nav-link"
+          >
+            Create Post
           </Link>
         </li>
         {!isAuthenticated() && (
@@ -47,13 +61,13 @@ const Nav = ({ history }) => {
         {isAuthenticated() && (
           <>
             <li className="nav-item">
-              <span
+              <Link
+                to={`/findpeople`}
+                style={isActive(history, `/findpeople`)}
                 className="nav-link"
-                style={(isActive(history, "/signout"), { cursor: "pointer" })}
-                onClick={() => signout(() => history.push("/"))}
               >
-                Sign Out
-              </span>
+                Find People
+              </Link>
             </li>
 
             <li className="nav-item">
@@ -65,9 +79,20 @@ const Nav = ({ history }) => {
                 {`${isAuthenticated().user.name}'s Profile`}
               </Link>
             </li>
+
+            <li className="nav-item">
+              <span
+                className="nav-link"
+                style={(isActive(history, "/signout"), { cursor: "pointer" })}
+                onClick={() => signout(() => history.push("/"))}
+              >
+                Sign Out
+              </span>
+            </li>
           </>
         )}
       </ul>
+      </nav>
     </div>
   );
 };
