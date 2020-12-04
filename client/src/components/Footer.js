@@ -18,14 +18,6 @@ function Footer() {
       >
         Created with React
       </footer>
-      {/* <p className="footer-creation">
-                Created by
-            </p>
-            <div className="input-areas">
-                <form>
-                    <input type="email" name="email" placeholder="Your email" />
-                </form>
-            </div> */}
     </div>
   );
 }

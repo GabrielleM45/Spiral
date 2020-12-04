@@ -10,7 +10,11 @@ const isActive = (history, path) => {
 const Nav = ({ history }) => {
   return (
     <div>
-      <nav className="navbar navbar-dark bg-dark fixed-top navbar-default">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span className="navbar-toggler-icon"></span>
+  </button>
+      <div className="collapse navbar-collapse" id="navbarNavDropdown">
       <ul className="navbar nav">
         <li className="nav-item">
           <Link className="nav-link" style={isActive(history, "/")} to="/">
@@ -92,6 +96,7 @@ const Nav = ({ history }) => {
           </>
         )}
       </ul>
+      </div>
       </nav>
     </div>
   );

@@ -92,7 +92,7 @@ class Profile extends Component {
       : profilePic;
 
     return (
-      <div className="container">
+      <div className="container" style={{marginTop: "90px", padding: "10px", borderRadius: "10px", backgroundColor: "rgba(255, 255, 255, 0.95)"}}>
         <h2 className="mt-5 mb-5">Profile</h2>
         <div className="row">
           <div className="col-md-4">

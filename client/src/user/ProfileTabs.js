@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import profilePic from "../assets/avatar.png";
+import defaultPic from "../assets/mountain.jpg";
 
 
 class ProfileTabs extends Component {
@@ -65,6 +66,13 @@ class ProfileTabs extends Component {
               <div key={i}>
                 <div>
                   <Link to={`/post/${post._id}`}>
+                  <img
+                      src={`${process.env.REACT_APP_API_URL}/post/photo/${post._id}`}
+                      alt={post.title}
+                      onError={(i) => (i.target.src = `${defaultPic}`)}
+                      className="float-left mr-2"
+                      style={{ height: "50px", width: "auto", objectFit: "cover" }}
+                    />
                     <div>
                       <p className="lead">{post.title}</p>
                     </div>

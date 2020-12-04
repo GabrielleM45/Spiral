@@ -76,7 +76,7 @@ class Comment extends Component {
     const { error } = this.state;
     return (
       <div>
-        <h2 className="mt-5 mb-5">Leave a comment.</h2>
+        <h2 className="mt-5 mb-5" >Leave a comment.</h2>
         <form onSubmit={this.addComment}>
           <div className="form-group">
             <input

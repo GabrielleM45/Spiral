@@ -71,7 +71,7 @@ class NewPost extends Component {
 
   newPostForm = (title, body) => {
     return (
-      <form>
+      <form className="p-2">
         <div className="form-group">
           <label className="text-muted">Post Photo</label>
           <input
@@ -118,8 +118,8 @@ class NewPost extends Component {
     }
 
     return (
-      <div className="container">
-        <h2 className="mt-5 mb-5">Create a new post</h2>
+      <div className="container" style={{marginTop: "90px", padding: "10px", borderRadius: "10px", backgroundColor: "rgba(255, 255, 255, 0.95)"}}>
+        <h2 className="mt-5 mb-5 p-2">Create a new post</h2>
         <div
           className="alert alert-danger"
           style={{ display: error ? "" : "none" }}

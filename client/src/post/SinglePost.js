@@ -157,7 +157,7 @@ class SinglePost extends Component {
     }
 
     return (
-      <div className="container">
+      <div className="container" style={{marginTop: "90px", padding: "10px", borderRadius: "10px", backgroundColor: "rgba(255, 255, 255, 0.95)"}}>
         <h2 className="display-2 mt-5 mb-5">{post.title}</h2>
         {!post ? (
           <div className="jumbotron text-center">

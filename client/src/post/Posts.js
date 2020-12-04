@@ -60,8 +60,8 @@ class Posts extends Component {
   render() {
     const { posts } = this.state;
     return (
-      <div className="container">
-        <h2 className="mt-5 mb-5">{!posts.length ? "Loading..." : "Recent Posts"}</h2>
+      <div className="container" >
+        <h2 className="mt-5 mb-5 p-2" style={{backgroundColor: "white", borderRadius: "10px"}}>{!posts.length ? "Loading..." : "Recent Posts:"}</h2>
         {this.renderPosts(posts)}
       </div>
     );
