@@ -1,6 +1,8 @@
 const nodeMailer = require("nodemailer");
 const defaultEmailData = { from: "noreply@node-react.com"};
 
+
+// Functionality not quite working
 exports.sendEmail = emailData=> {
     const transporter = nodeMailer.createTransport({
         host: "smtp.gmail.com",
@@ -8,8 +10,8 @@ exports.sendEmail = emailData=> {
         secure: false,
         requireTLS: true,
         auth: {
-            user: "maynperalta@gmail.com",
-            pass: "hfafpofphtlopthc"
+            user: "",
+            pass: ""
         }
     });
     return (
