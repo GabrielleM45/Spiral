@@ -3,7 +3,8 @@ import React from "react";
 function Footer() {
   return (
     <div className="footer-container">
-      <footer className="fixed-bottom"
+      <footer
+        className="fixed-bottom"
         style={{
           height: "30px",
           bottom: 0,

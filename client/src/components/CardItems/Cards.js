@@ -1,6 +1,6 @@
 import React from 'react'
 import CardItems from './CardItems';
-import '../components/assets/css/Cards.css';
+import './Cards.css';
 
 
 export function Cards() {
