@@ -6,14 +6,15 @@ const _ = require("lodash");
 
 exports.signup = async (req, res) => {
   // Check if user already exists
+  // console.log(req.body)
   const userExists = await User.findOne({ email: req.body.email });
   if (userExists)
     // Unauthorized status
     return res.status(403).json({
       error: "Email is already in use!",
     });
-  const user = await new User(req.body);
-  await user.save();
+  const user = await  User.create(req.body);
+ 
   res.status(200).json({ message: "Signup succesful! Please log in." });
 };
 

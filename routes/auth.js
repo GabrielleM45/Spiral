@@ -5,9 +5,9 @@ const { userSignupValidator } = require("../validator");
 
 const router = express.Router();
 
-router.post("/signup", userSignupValidator, signup);
-router.post("/signin", signin);
-router.get("/signout", signout);
+router.post("/api/signup", userSignupValidator, signup);
+router.post("/api/signin", signin);
+router.get("/api/signout", signout);
 
 // Any route containing :userId, app with first execute userByID()
 router.param("userId", userById);

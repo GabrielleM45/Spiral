@@ -1,4 +1,5 @@
 export const signup = (user) => {
+
   return fetch(`${process.env.REACT_APP_API_URL}/signup`, {
     method: "POST",
     headers: {
@@ -35,6 +36,7 @@ export const authenticate = (jwt, next) => {
     next();
   }
 };
+
 
 export const signout = (next) => {
   if (typeof window !== "undefined") localStorage.removeItem("jwt");
