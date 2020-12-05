@@ -16,6 +16,8 @@ mongoose
   .connect(process.env.MONGODB_URI || "mongodb://localhost/spirl", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
   })
   .then(() => console.log("DB Connected."));
 

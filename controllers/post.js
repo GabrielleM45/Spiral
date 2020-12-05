@@ -87,19 +87,6 @@ exports.isPoster = (req, res, next) => {
   next();
 };
 
-// exports.updatePost = (req, res, next) => {
-//   let post = req.post;
-//   post = _.extend(post, req.body);
-//   post.updated = Date.now();
-//   post.save((err) => {
-//     if (err) {
-//       return res.status(400).json({
-//         error: err,
-//       });
-//     }
-//     res.json(post);
-//   });
-// };
 exports.updatePost = (req, res, next) => {
   let form = new formidable.IncomingForm();
   form.keepExtensions = true;
