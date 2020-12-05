@@ -52,7 +52,7 @@ class Users extends Component {
     const { users } = this.state;
     return (
       <div className="container" >
-        <h2 className="mt-5 mb-2 p-2" style={{backgroundColor: "white", borderRadius: "10px"}}>The Spirl Community:</h2>
+        <h2 className="mt-5 mb-2 p-2" style={{backgroundColor: "grey", borderRadius: "10px"}}>The Spirl Community:</h2>
         {this.renderUsers(users)}
       </div>
     );
