@@ -42,6 +42,11 @@ app.get("/", (req, res) => {
   });
 });
 
+// if production env utilize build folder and render react app
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
+
 // Middleware
 // Request logger for node.js
 app.use(morgan("dev"));
@@ -63,3 +68,4 @@ const port = process.env.PORT || 8080;
 app.listen(port, () => {
   console.log(`A Node JS API is listening on port: ${port}`);
 });
+
