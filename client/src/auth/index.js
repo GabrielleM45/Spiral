@@ -1,5 +1,6 @@
 export const signup = (user) => {
-  return fetch(`${process.env.REACT_APP_API_URL}/signup`, {
+  const url = process.env.NODE_ENV === "production" ? `${process.env.PRODUCTION_APP_API_URL}/signup` : `${process.env.REACT_APP_API_URL}/signup`
+  return fetch(url, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -14,7 +15,8 @@ export const signup = (user) => {
 };
 
 export const signin = (user) => {
-  return fetch(`${process.env.REACT_APP_API_URL}/signin`, {
+  const url = process.env.NODE_ENV === "production" ? `${process.env.PRODUCTION_APP_API_URL}/signin` : `${process.env.REACT_APP_API_URL}/signin`
+  return fetch(url, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -37,9 +39,10 @@ export const authenticate = (jwt, next) => {
 };
 
 export const signout = (next) => {
+  const url = process.env.NODE_ENV === "production" ? `${process.env.PRODUCTION_APP_API_URL}/signout` : `${process.env.REACT_APP_API_URL}/signout`
   if (typeof window !== "undefined") localStorage.removeItem("jwt");
   next();
-  return fetch(`${process.env.REACT_APP_API_URL}/signout`, {
+  return fetch(url, {
     method: "GET",
   })
     .then((response) => {

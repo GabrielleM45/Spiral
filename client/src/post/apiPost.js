@@ -1,5 +1,6 @@
 export const create = (userId, token, post) => {
-  return fetch(`${process.env.REACT_APP_API_URL}/post/new/${userId}`, {
+  const url = process.env.NODE_ENV === "production" ? `${process.env.PRODUCTION_APP_API_URL}/post/new/${userId}` : `${process.env.REACT_APP_API_URL}/post/new/${userId}`
+  return fetch(url, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -14,7 +15,8 @@ export const create = (userId, token, post) => {
 };
 
 export const list = () => {
-  return fetch(`${process.env.REACT_APP_API_URL}/posts`, {
+  const url = process.env.NODE_ENV === "production" ? `${process.env.PRODUCTION_APP_API_URL}/posts` : `${process.env.REACT_APP_API_URL}/posts`
+  return fetch(url, {
     method: "GET",
   })
     .then((response) => {
@@ -24,7 +26,8 @@ export const list = () => {
 };
 
 export const singlePost = (postId) => {
-  return fetch(`${process.env.REACT_APP_API_URL}/post/${postId}`, {
+  const url = process.env.NODE_ENV === "production" ? `${process.env.PRODUCTION_APP_API_URL}/post/${postId}` : `${process.env.REACT_APP_API_URL}/post/${postId}`
+  return fetch(url, {
     method: "GET",
   })
     .then((response) => {
@@ -34,7 +37,8 @@ export const singlePost = (postId) => {
 };
 
 export const listByUser = (userId, token) => {
-  return fetch(`${process.env.REACT_APP_API_URL}/posts/by/${userId}`, {
+  const url = process.env.NODE_ENV === "production" ? `${process.env.PRODUCTION_APP_API_URL}/posts/by/${userId}` : `${process.env.REACT_APP_API_URL}/posts/by/${userId}`
+  return fetch(url, {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -49,7 +53,8 @@ export const listByUser = (userId, token) => {
 };
 
 export const removePost = (postId, token) => {
-  return fetch(`${process.env.REACT_APP_API_URL}/post/${postId}`, {
+  const url = process.env.NODE_ENV === "production" ? `${process.env.PRODUCTION_APP_API_URL}/post/${postId}` : `${process.env.REACT_APP_API_URL}/post/${postId}`
+  return fetch(url, {
     method: "DELETE",
     headers: {
       Accept: "application/json",
@@ -64,7 +69,8 @@ export const removePost = (postId, token) => {
 };
 
 export const update = (postId, token, post) => {
-  return fetch(`${process.env.REACT_APP_API_URL}/post/${postId}`, {
+  const url = process.env.NODE_ENV === "production" ? `${process.env.PRODUCTION_APP_API_URL}/post/${postId}` : `${process.env.REACT_APP_API_URL}/post/${postId}`
+  return fetch(url, {
     method: "PUT",
     headers: {
       Accept: "application/json",
@@ -79,7 +85,8 @@ export const update = (postId, token, post) => {
 };
 
 export const like = (userId, token, postId) => {
-  return fetch(`${process.env.REACT_APP_API_URL}/post/like`, {
+  const url = process.env.NODE_ENV === "production" ? `${process.env.PRODUCTION_APP_API_URL}/post/like` : `${process.env.REACT_APP_API_URL}/post/like`
+  return fetch(url, {
     method: "PUT",
     headers: {
       Accept: "application/json",
@@ -95,7 +102,8 @@ export const like = (userId, token, postId) => {
 };
 
 export const unlike = (userId, token, postId) => {
-  return fetch(`${process.env.REACT_APP_API_URL}/post/unlike`, {
+  const url = process.env.NODE_ENV === "production" ? `${process.env.PRODUCTION_APP_API_URL}/post/unlike` : `${process.env.REACT_APP_API_URL}/post/unlike`
+  return fetch(url, {
     method: "PUT",
     headers: {
       Accept: "application/json",
@@ -111,7 +119,8 @@ export const unlike = (userId, token, postId) => {
 };
 
 export const comment = (userId, token, postId, comment) => {
-  return fetch(`${process.env.REACT_APP_API_URL}/post/comment`, {
+  const url = process.env.NODE_ENV === "production" ? `${process.env.PRODUCTION_APP_API_URL}/post/comment` : `${process.env.REACT_APP_API_URL}/post/comment`
+  return fetch(url, {
     method: "PUT",
     headers: {
       Accept: "application/json",
@@ -127,7 +136,8 @@ export const comment = (userId, token, postId, comment) => {
 };
 
 export const deleteComment = (userId, token, postId, comment) => {
-  return fetch(`${process.env.REACT_APP_API_URL}/post/deletecomment`, {
+  const url = process.env.NODE_ENV === "production" ? `${process.env.PRODUCTION_APP_API_URL}/post/deletecomment` : `${process.env.REACT_APP_API_URL}/post/deletecomment`
+  return fetch(url, {
     method: "PUT",
     headers: {
       Accept: "application/json",
