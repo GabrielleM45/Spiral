@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { v4: uuidv4 } = require('uuid');
 const crypto = require("crypto");
 const {ObjectId} = mongoose.Schema
+const Post = require("./post")
 
 const userSchema = new mongoose.Schema({
   name: {
