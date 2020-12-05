@@ -75,4 +75,10 @@ userSchema.methods = {
   },
 };
 
+userSchema.pre("remove", function(next) {
+  Post.remove({ postedBy: this._id }).exec();
+  next();
+});
+
+
 module.exports = mongoose.model("User", userSchema);

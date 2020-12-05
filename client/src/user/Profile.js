@@ -76,10 +76,6 @@ class Profile extends Component {
     this.init(userId);
   }
 
-  // static getDerivedStateFromProps(props) {
-  //   const userId = props.match.params.userId;
-  //   this.init(userId);
-  // }
 
   render() {
     const { redirectToSignin, user, posts } = this.state;
@@ -93,7 +89,8 @@ class Profile extends Component {
 
     return (
       <div className="container" style={{marginTop: "90px", padding: "10px", borderRadius: "10px", backgroundColor: "rgba(255, 255, 255, 0.95)"}}>
-        <h2 className="mt-5 mb-5">Profile</h2>
+        
+        <h2 className="mt-5 mb-5">{user.name}'s Profile</h2>
         <div className="row">
           <div className="col-md-4">
             <img
@@ -106,7 +103,7 @@ class Profile extends Component {
           </div>
           <div className="col-md-8">
             <div className="lead mt-2">
-              <p>Hello, {user.name}</p>
+              <p>Hello, I'm {user.name}</p>
               <p>Email: {user.email}</p>
               <p>{`Joined ${new Date(user.created).toDateString()}`}</p>
             </div>
@@ -139,9 +136,11 @@ class Profile extends Component {
         <div className="row">
           <div className="col md-12 mt-5 mb-5">
             <hr />
+            <h5>About Me:</h5>
             <p className="lead">{user.about}</p>
-            <hr />
 
+            <hr />
+            
             <ProfileTabs
               followers={user.followers}
               following={user.following}

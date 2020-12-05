@@ -12,7 +12,7 @@ import NewPost from "../post/NewPost";
 import SinglePost from "../post/SinglePost";
 import PrivateRoute from "../auth/PrivateRoute";
 import UpdatePost from "../post/UpdatePost";
-import Footer from "../components/Footer"
+import Footer from "../components/Footer.js"
 
 
 const MainRouter = () => {

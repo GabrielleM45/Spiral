@@ -30,7 +30,7 @@ export const update = (userId, token, user) => {
 };
 
 export const list = () => {
-  return fetch(`/api/users`, {
+  return fetch(`${process.env.REACT_APP_API_URL}/users`, {
     method: "GET",
   })
     .then((response) => {
