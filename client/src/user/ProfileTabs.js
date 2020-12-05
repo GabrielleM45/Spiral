@@ -77,7 +77,7 @@ class ProfileTabs extends Component {
                       src={`${process.env.REACT_APP_API_URL}/post/photo/${post._id}`}
                       alt={post.title}
                       onError={(i) => (i.target.src = `${defaultPic}`)}
-                      className="mr-2 float-left"
+                      className="mr-2 p-1 float-left"
                       style={{
                         height: "100px",
                         width: "auto",

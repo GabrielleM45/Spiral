@@ -51,7 +51,7 @@ class Users extends Component {
   render() {
     const { users } = this.state;
     return (
-      <div className="container" >
+      <div className="container" style={{paddingTop: "70px"}}>
         <h2 className="mt-5 mb-2 p-2" style={{backgroundColor: "white", borderRadius: "10px"}}>The Spirl Community:</h2>
         {this.renderUsers(users)}
       </div>
