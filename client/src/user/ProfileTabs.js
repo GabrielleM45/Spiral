@@ -26,7 +26,7 @@ class ProfileTabs extends Component {
                         height="50px"
                         width="50px"
                         onError={(i) => (i.target.src = `${profilePic}`)}
-                        src={`${process.env.REACT_APP_API_URL}/user/photo/${person._id}`}
+                        src={`/user/photo/${person._id}`}
                         alt={person.name}
                       />
                       <div>
@@ -52,7 +52,7 @@ class ProfileTabs extends Component {
                       height="50px"
                       width="50px"
                       onError={(i) => (i.target.src = `${profilePic}`)}
-                      src={`${process.env.REACT_APP_API_URL}/user/photo/${person._id}`}
+                      src={`/user/photo/${person._id}`}
                       alt={person.name}
                     />
                     <div>
@@ -74,7 +74,7 @@ class ProfileTabs extends Component {
                     <div class="img-square-wrapper">
                   <Link to={`/post/${post._id}`}>
                     <img
-                      src={`${process.env.REACT_APP_API_URL}/post/photo/${post._id}`}
+                      src={`/post/photo/${post._id}`}
                       alt={post.title}
                       onError={(i) => (i.target.src = `${defaultPic}`)}
                       className="mr-2 p-1 float-left"

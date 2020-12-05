@@ -111,7 +111,7 @@ class Comment extends Component {
                     height="30px"
                     width="30px"
                     onError={(i) => (i.target.src = `${profilePic}`)}
-                    src={`${process.env.REACT_APP_API_URL}/user/photo/${comment.postedBy._id}`}
+                    src={`/user/photo/${comment.postedBy._id}`}
                     alt={comment.postedBy.name}
                   />
                 </Link>

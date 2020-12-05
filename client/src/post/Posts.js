@@ -30,7 +30,8 @@ class Posts extends Component {
             <div className="card col-md-12 mb-2" style={{borderRadius: "10px"}} key={i}>
               <div className="card-body">
                 <img
-                  src={`${process.env.REACT_APP_API_URL}/post/photo/${post._id}`}
+                  src={`/post/photo/${post._id}`}
+
                   alt={post.title}
                   onError={i => i.target.src = `${defaultPic}`}
                   className="img-thumbnail mb-3 mr-5 float-left"

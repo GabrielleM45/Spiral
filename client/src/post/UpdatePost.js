@@ -152,9 +152,7 @@ class UpdatePost extends Component {
         <img
           style={{ height: "200px", width: "auto" }}
           className="img-thumbnail"
-          src={`${
-            process.env.REACT_APP_API_URL
-          }/post/photo/${id}?${new Date().getTime()}`}
+          src={`/post/photo/${id}?${new Date().getTime()}`}
           onError={(i) => (i.target.src = `${defaultPic}`)}
           alt={title}
         />

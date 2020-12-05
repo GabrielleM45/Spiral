@@ -171,9 +171,7 @@ class EditProfile extends Component {
     }
 
     const photoUrl = id
-      ? `${
-          process.env.REACT_APP_API_URL
-        }/user/photo/${id}?${new Date().getTime()}`
+      ? `/user/photo/${id}?${new Date().getTime()}`
       : profilePic;
 
     return (
