@@ -1,4 +1,5 @@
 export const read = (userId, token) => {
+  const url = process.env.NODE_ENV === "production" ? `${process.env.PRODUCTION_APP_API_URL}/user/${userId}` : `${process.env.REACT_APP_API_URL}/user/${userId}` 
   return fetch(`${process.env.REACT_APP_API_URL}/user/${userId}`, {
     method: "GET",
     headers: {
