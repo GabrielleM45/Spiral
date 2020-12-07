@@ -13,7 +13,7 @@ MERN
 
 body-parser, cookie-parser, express-jwt, Formidable, lodash, jsonwebtoken, cors, express-validator, 
 
-## Usage
+## Link
 
 https://immense-river-92138.herokuapp.com/
 
