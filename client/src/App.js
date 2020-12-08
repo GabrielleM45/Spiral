@@ -1,13 +1,13 @@
 import React from "react";
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import MainRouter from "./routes/MainRouter";
 import "./App.css"
 
 const App = () => {
   return (
-  <BrowserRouter>
+  <HashRouter basename = "/">
     <MainRouter />
-  </BrowserRouter>
+  </HashRouter>
   )
 }
 export default App;
