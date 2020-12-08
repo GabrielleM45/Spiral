@@ -83,7 +83,7 @@ class Signup extends Component {
   render() {
     const { name, email, password, error, open } = this.state;
     return (
-      <div className="container">
+      <div className="container" style={{marginTop: "90px", padding: "10px", borderRadius: "10px", backgroundColor: "rgba(255, 255, 255, 0.95)"}}>
         <h2 className="mt-5 mb-5">Sign up</h2>
       
         <div className="alert alert-danger" style={{display: error ? "" : "none"}}>{error}</div>

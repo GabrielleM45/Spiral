@@ -59,7 +59,10 @@ class EditProfile extends Component {
       return false;
     }
     if (password.length >= 1 && password.length <= 5) {
-      this.setState({ error: "Password must be at least 6 characters long.", loading: false });
+      this.setState({
+        error: "Password must be at least 6 characters long.",
+        loading: false,
+      });
       return false;
     }
     return true;
@@ -168,13 +171,11 @@ class EditProfile extends Component {
     }
 
     const photoUrl = id
-      ? `${
-          process.env.REACT_APP_API_URL
-        }/user/photo/${id}?${new Date().getTime()}`
+      ? `/user/photo/${id}?${new Date().getTime()}`
       : profilePic;
 
     return (
-      <div className="container">
+      <div className="container" style={{marginTop: "90px", padding: "10px", borderRadius: "10px", backgroundColor: "rgba(255, 255, 255, 0.95)"}}>
         <h2 className="mt-5 mb-5">Edit Profile</h2>
         <div
           className="alert alert-danger"
@@ -198,7 +199,10 @@ class EditProfile extends Component {
           alt={name}
         />
 
-        {this.signupForm(name, email, password, about)}
+        {/* {this.signupForm(name, email, password, about)} */}
+        {isAuthenticated().user.role === "admin" ||
+          (isAuthenticated().user._id === id &&
+            this.signupForm(name, email, password, about))}
       </div>
     );
   }

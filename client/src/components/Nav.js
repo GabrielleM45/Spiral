@@ -10,15 +10,34 @@ const isActive = (history, path) => {
 const Nav = ({ history }) => {
   return (
     <div>
-      <ul className="nav nav-tabs bg-primary">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        
+      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav`" aria-expanded="false" aria-label="Toggle navigation">
+    <span className="navbar-toggler-icon"></span>
+  </button>
+  <div className="collapse navbar-collapse" id="navbarNav">
+      <ul className="navbar-nav mr-auto">
         <li className="nav-item">
           <Link className="nav-link" style={isActive(history, "/")} to="/">
             Home
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" style={isActive(history, "/users")} to="/users">
+          <Link
+            className="nav-link"
+            style={isActive(history, "/users")}
+            to="/users"
+          >
             Users
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link
+            to={`/post/create`}
+            style={isActive(history, `/post/create`)}
+            className="nav-link"
+          >
+            Create Post
           </Link>
         </li>
         {!isAuthenticated() && (
@@ -47,13 +66,24 @@ const Nav = ({ history }) => {
         {isAuthenticated() && (
           <>
             <li className="nav-item">
-              <span
+              <Link
+                to={`/findpeople`}
+                style={isActive(history, `/findpeople`)}
                 className="nav-link"
-                style={(isActive(history, "/signout"), { cursor: "pointer" })}
-                onClick={() => signout(() => history.push("/"))}
               >
-                Sign Out
-              </span>
+                Find People
+              </Link>
+
+            </li>
+            <li className="nav-item">
+              <Link
+                to={`/frame`}
+                style={isActive(history, `/frame`)}
+                className="nav-link"
+              >
+                Chat
+              </Link>
+
             </li>
 
             <li className="nav-item">
@@ -65,9 +95,21 @@ const Nav = ({ history }) => {
                 {`${isAuthenticated().user.name}'s Profile`}
               </Link>
             </li>
+
+            <li className="nav-item">
+              <span
+                className="nav-link"
+                style={(isActive(history, "/signout"), { cursor: "pointer", color: "white" })}
+                onClick={() => signout(() => history.push("/"))}
+              >
+                Sign Out
+              </span>
+            </li>
           </>
         )}
       </ul>
+      </div>
+      </nav>
     </div>
   );
 };

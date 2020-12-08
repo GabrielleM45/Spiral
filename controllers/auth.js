@@ -1,19 +1,19 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const expressJwt = require('express-jwt');
+const expressJwt = require("express-jwt");
 const User = require("../models/user");
+const _ = require("lodash");
 
 exports.signup = async (req, res) => {
   // Check if user already exists
-  // console.log(req.body)
   const userExists = await User.findOne({ email: req.body.email });
   if (userExists)
-  // Unauthorized status
+    // Unauthorized status
     return res.status(403).json({
       error: "Email is already in use!",
     });
-  const user = await  User.create(req.body);
- 
+  const user = await new User(req.body);
+  await user.save();
   res.status(200).json({ message: "Signup succesful! Please log in." });
 };
 
@@ -46,14 +46,14 @@ exports.signin = (req, res) => {
 
 // Clearing cookie to sign user out.
 exports.signout = (req, res) => {
-    res.clearCookie("t")
-    return res.json({message: "You have successfully signed out."});
+  res.clearCookie("t");
+  return res.json({ message: "You have successfully signed out." });
 };
 
 // Require user to be signed in to access certain routes
 exports.requireSignin = expressJwt({
   // If token is valid, express-jwt appends verified user ID
-    secret: process.env.JWT_SECRET,
-    algorithms: ["sha1", "RS256", "HS256"],
-    userProperty: "auth"
+  secret: process.env.JWT_SECRET,
+  algorithms: ["sha1", "RS256", "HS256"],
+  userProperty: "auth",
 });

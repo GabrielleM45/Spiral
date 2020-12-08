@@ -16,6 +16,8 @@ mongoose
   .connect(process.env.MONGODB_URI || "mongodb://localhost/spirl", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
   })
   .then(() => console.log("DB Connected."));
 
@@ -28,17 +30,22 @@ const postRoutes = require("./routes/post");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 // apiDocs
-app.get("/", (req, res) => {
-  fs.readFile("docs/apiDocs.json", (err, data) => {
-    if (err) {
-      res.status(400).json({
-        error: err,
-      });
-    }
-    const docs = JSON.parse(data);
-    res.json(docs);
-  });
-});
+// app.get("/", (req, res) => {
+//   fs.readFile("docs/apiDocs.json", (err, data) => {
+//     if (err) {
+//       res.status(400).json({
+//         error: err,
+//       });
+//     }
+//     const docs = JSON.parse(data);
+//     res.json(docs);
+//   });
+// });
+
+// if production env utilize build folder and render react app
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
 // Middleware
 // Request logger for node.js

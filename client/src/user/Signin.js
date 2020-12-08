@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import { signin, authenticate } from "../auth"
+import { Link, Redirect } from "react-router-dom";
+import { signin, authenticate } from "../auth";
 
 class Signin extends Component {
   constructor() {
@@ -18,8 +18,6 @@ class Signin extends Component {
     this.setState({ error: "" });
     this.setState({ [name]: event.target.value });
   };
-
-  
 
   clickSubmit = (event) => {
     event.preventDefault();
@@ -40,8 +38,6 @@ class Signin extends Component {
       }
     });
   };
-
-  
 
   signinForm = (email, password) => {
     return (
@@ -81,7 +77,7 @@ class Signin extends Component {
       return <Redirect to="/" />;
     }
     return (
-      <div className="container">
+      <div className="container" style={{marginTop: "90px", padding: "10px", borderRadius: "10px", backgroundColor: "rgba(255, 255, 255, 0.95)"}}>
         <h2 className="mt-5 mb-5">Sign in</h2>
 
         <div

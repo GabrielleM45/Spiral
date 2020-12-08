@@ -2,6 +2,7 @@ const _ = require("lodash");
 const User = require("../models/user");
 const formidable = require("formidable");
 const fs = require("fs");
+const { response } = require("express");
 
 exports.userById = (req, res, next, id) => {
   User.findById(id)
@@ -113,6 +114,7 @@ exports.userPhoto = (req, res, next) => {
 exports.deleteUser = (req, res, next) => {
   let user = req.profile;
   user.remove((err, user) => {
+    console.log(err)
     if (err) {
       return res.status(400).json({
         error: err,
@@ -156,7 +158,6 @@ exports.addFollower = (req, res) => {
     });
 };
 
-
 exports.removeFollowing = (req, res, next) => {
   User.findByIdAndUpdate(
     req.body.userId,
@@ -188,4 +189,15 @@ exports.removeFollower = (req, res) => {
       result.salt = undefined;
       res.json(result);
     });
+};
+
+exports.findPeople = (req, res) => {
+  let following = req.profile.following;
+  following.push(req.profile._id);
+  User.find({ _id: { $nin: following } }, (err, users) => {
+    if (err) {
+      return res.status(400).json({});
+    }
+    res.json(users);
+  }).select("name");
 };

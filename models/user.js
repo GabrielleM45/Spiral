@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { v4: uuidv4 } = require('uuid');
 const crypto = require("crypto");
 const {ObjectId} = mongoose.Schema
+const Post = require("./post")
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -33,7 +34,8 @@ const userSchema = new mongoose.Schema({
     trim: true
   },
   following: [{type: ObjectId, ref: "User"}],
-  followers: [{type: ObjectId, ref: "User"}]
+  followers: [{type: ObjectId, ref: "User"}],
+  
 });
 
 // Virtual field
@@ -73,5 +75,11 @@ userSchema.methods = {
     }
   },
 };
+
+userSchema.pre("remove", function(next) {
+  Post.remove({ postedBy: this._id }).exec();
+  next();
+});
+
 
 module.exports = mongoose.model("User", userSchema);
